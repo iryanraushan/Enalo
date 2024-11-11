@@ -1,70 +1,88 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    department: '',
+    date: '',
+    message: ''
+  });
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [department, setDepartment] = useState("")
-  const [date, setDate] = useState("")
-  const [message, setMessage] = useState("")
+  const validateEmail = () => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email);
 
- const validateEmail = () => {
-  let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2, }$/
-  return regex.test(email)
- }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if(validateEmail){
-      console.log(`name : ${name} email : ${email} department : ${department} date:${date} message${message}`);
+    if (validateEmail()) {
+      console.log(`Form Data: `, formData);
+    } else {
+      alert("Please enter a valid email address.");
     }
-
-  }
-
-  const setNameValue = (e) => {
-    setName(e.target.value)
-  }
-  const setEmailValue = (e) => {
-    setEmail(e.target.value)
-  }
-  const setDepartmentValue = (e) => {
-    setDepartment(e.target.value)
-  }
-  const setDateValue = (e) => {
-    setDate(e.target.value)
-  }
-  const setMessageValue = (e) => {
-    setMessage(e.target.value)
-  }
+  };
 
   return (
-    <div>
-      <p>Contact Us</p>
-      <h2>Make an appointment</h2>
+    <div className="container">
+      <h1>Contact Us</h1>
+      <h2>Make an Appointment</h2>
 
-      <form  id="contactForm" onSubmit={handleSubmit}>
-        <div className='inputValue1'>
-          <input type="text" id='name' className='text_box' placeholder='Full name*' value={name} onChange={setNameValue}/>
-          <input type="email" id="email" className='text_box' placeholder='Email*' value={email} onChange={setEmailValue}/>
+      <form id="contactForm" onSubmit={handleSubmit} className="form">
+        <div className="input-group">
+          <input
+            type="text"
+            name="name"
+            className="input-field"
+            placeholder="Full name*"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <input
+            type="email"
+            name="email"
+            className="input-field"
+            placeholder="Email*"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
         </div>
-        <div className='inputValue1'>
-          <select name="department" id="department" value={department} onChange={setDepartmentValue}>
-            <option value="option1">option1</option>
-            <option value="option2">option2</option>
-            <option value="option3">option3</option>
+        <div className="input-group">
+          <select
+            name="department"
+            className="input-field"
+            value={formData.department}
+            onChange={handleInputChange}
+          >
+            <option value="" disabled>Select Department</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
           </select>
-
-
-          <input type="date" value={date} onChange={setDateValue}/>
+          <input
+            type="date"
+            name="date"
+            className="input-field"
+            value={formData.date}
+            onChange={handleInputChange}
+          />
         </div>
-        <textarea name="message" id="notes" onChange={setMessageValue} className='text_box' placeholder='Message' value={message}></textarea>
+        <textarea
+          name="message"
+          className="textarea-field"
+          placeholder="Message"
+          value={formData.message}
+          onChange={handleInputChange}
+        ></textarea>
 
-        <button type='submit'>Submit</button>
+        <button type="submit" className="submit-button">Submit</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+
