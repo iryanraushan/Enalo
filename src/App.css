@@ -1,0 +1,77 @@
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+p, h2{
+  text-align: center;
+}
+
+#contactForm{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  gap: 15px;
+  width: 90%;
+}
+
+.text_box, select, input
+{
+  height: 2rem;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  padding: 5px 10px;
+  border: none;
+  font-size: 14px;
+  box-shadow: #888;
+  width: 100%;
+}
+
+select{
+  padding: 12px 15px;
+  height: 3rem;
+}
+
+.inputValue1{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+#notes{
+  height: 5rem;
+  width: 100%;
+}
+
+button{
+  width: 16rem;
+  background-color: rgb(156, 156, 253);
+  color: white;
+  text-transform: uppercase;
+  padding: 15px 0px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+button:active{
+  scale: 95%;
+}
+
+@media screen  and (max-width:700px) {
+.inputValue1{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+}
